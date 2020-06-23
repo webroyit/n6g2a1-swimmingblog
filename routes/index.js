@@ -4,7 +4,10 @@ const router = express.Router();
 // @desc    Login/Landing Page
 // @route   GET /
 router.get('/', (req, res) => {
-    res.render('login');
+    res.render('login', {
+        // To use a different template layout
+        layout: 'login'
+    });
 });
 
 // @desc    Dashboard
