@@ -2,7 +2,12 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
+const passport = require('passport');
+const session = require('express-session');
 const connectDB = require('./config/db');
+
+// Passport Config
+require('./config/passport')(passport);
 
 connectDB();
 
@@ -16,6 +21,17 @@ if(process.env.NODE_ENV === 'development'){
 // Use Handlebars
 app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
 app.set('view engine', 'hbs');
+
+// Express Sessions Middleware
+app.use(session({
+    secret: 'swimming blog',
+    resave: false,                  // Will not save session when there is no change
+    saveUninitialized: false,       // Does not create session until someting is stored
+}))
+
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Static Folder
 // __dirname for current directory
