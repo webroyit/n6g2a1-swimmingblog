@@ -13,5 +13,15 @@ module.exports = function(passport){
     // done is the callback
     async (accessToken, refreshToken, profile, done) => {
         console.log(profile);
-    }))
+    }));
+
+    // Determines which data of the user object should be stored in the session
+    passport.serializeUser((user, done) => {
+        done(null, user.id);
+    });
+
+    // Return the user data
+    passport.deserializeUser((id, done) => {
+        User.findById(id, (err, user) => done(err, user));
+    });
 }
