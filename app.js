@@ -1,9 +1,11 @@
 const path = require('path');
 const express = require('express');
+const mongoose = require('mongoose');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const passport = require('passport');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const connectDB = require('./config/db');
 
 // Passport Config
@@ -27,6 +29,9 @@ app.use(session({
     secret: 'swimming blog',
     resave: false,                  // Will not save session when there is no change
     saveUninitialized: false,       // Does not create session until someting is stored
+
+    // Store the session in MongoDB
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 
 // Passport Middleware
