@@ -5,7 +5,8 @@
             <div class="card">
                 <div class="card-image">
                     {{!-- ../user for the logged in user --}}
-                    {{editIcon user ../user _id}}
+                    {{!-- Use triple curly brace to parse HTML within handlebars --}}
+                    {{{editIcon user ../user _id}}}
                 </div>
                 <div class="card-content center-algin">
                     <h5>{{title}}</h5>
