@@ -1,5 +1,5 @@
 # Swimming Blog
-A blog about swimmers.
+A blog about swimmers.  The template is from Traversy Media youtube channel.
 
 ## Tools
 - node.js
